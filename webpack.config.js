@@ -1,8 +1,8 @@
 /*
 * @Author: Rosen
 * @Date:   2017-05-08 15:28:19
-* @Last Modified by:   10077
-* @Last Modified time: 2017-08-14 18:44:04
+* @Last Modified by:   Rosen
+* @Last Modified time: 2018-03-24 09:45:59
 */
 var webpack             = require('webpack');
 var ExtractTextPlugin   = require('extract-text-webpack-plugin');
@@ -46,7 +46,7 @@ var config = {
     },
     output: {
         path        : __dirname + '/dist/',
-        publicPath  : 'dev' === WEBPACK_ENV ? '/dist/' : '//s.bestgogo.cc/mmall-fe/dist/',
+        publicPath  : 'dev' === WEBPACK_ENV ? '/dist/' : '//s.happymmall.com/mmall-fe/dist/',
         filename    : 'js/[name].js'
     },
     externals : {
@@ -100,11 +100,19 @@ var config = {
         new HtmlWebpackPlugin(getHtmlConfig('user-pass-update', '修改密码')),
         new HtmlWebpackPlugin(getHtmlConfig('result', '操作结果')),
         new HtmlWebpackPlugin(getHtmlConfig('about', '关于MMall')),
-    ]
+    ],
+    devServer: {
+        port: 8088,
+        inline: true,
+        proxy : {
+            '**/*.do' : {
+                target: 'http://test.happymmall.com',
+                changeOrigin : true
+            }
+        }
+    }
+
 };
 
-if('dev' === WEBPACK_ENV){
-    config.entry.common.push('webpack-dev-server/client?http://localhost:8080/');
-}
 
 module.exports = config;
