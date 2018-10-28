@@ -28,6 +28,9 @@
   },
   "dependencies": {
     "font-awesome": "^4.7.0",
-    "hogan.js": "^3.0.2"
+    "hogan.js": "^3.0.2",
+    "npm": "^6.4.1",
+    "to": "^0.2.9",
+    "update": "^0.7.4"
   }
 }
